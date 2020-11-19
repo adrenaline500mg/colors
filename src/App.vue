@@ -1,19 +1,27 @@
 <template>
   <v-app>
+    <v-app-bar app>
+      <v-toolbar-title>Colors</v-toolbar-title>
+    </v-app-bar>
     <v-main>
-      <ColorGrid/>
+      <v-container fluid>
+        <Layout/>
+      </v-container>
     </v-main>
+    <v-footer app>
+      2020 @ Bárbara Melero López
+    </v-footer>
   </v-app>
 </template>
 
 <script>
-import ColorGrid from './components/ColorGrid';
+import Layout from './layout/Layout';
 
 export default {
   name: 'App',
 
   components: {
-    ColorGrid
+    Layout
   },
 
   data: () => ({

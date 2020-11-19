@@ -1,17 +1,13 @@
 <template>
 	<v-row>
+		<v-overlay :value="loading" color="rgba(236, 240, 245, 1)" absolute>
+			<v-progress-circular color="#409EFF" indeterminate size="64"></v-progress-circular>
+		</v-overlay>
 		<v-col>
 			<v-row>
 				<v-col>
 					<v-row>
-						<v-col>
-							<p class="text--h1">
-								Colors
-							</p>
-						</v-col>
-					</v-row>
-					<v-row>
-						<v-col cols="4" v-for="(color, index) in colors" :key="index">
+						<v-col cols="6" md="4" v-for="(color, index) in colors" :key="index">
 							<ColorCard :color="color" @click="copyClipboard"/>
 						</v-col>
 					</v-row>
@@ -29,6 +25,7 @@
 				</v-col>
 			</v-row>
 			<DialogCopy ref="dialogCopy"/>
+			<ErrorBar v-model="snackbar" :text="text" />
 		</v-col>
 	</v-row>
 </template>
@@ -45,7 +42,9 @@ export default {
 		return {
 			colors: [],
 			page: 1,
-			totalPages: 1
+			totalPages: 1,
+			loading: true,
+			snackbar: false
 		}
 	},
 	mounted() {
@@ -58,9 +57,17 @@ export default {
 	},
 	methods: {
 		async loadColors(page = 1) {
-			let data = await new ColorService().load(page);
-			this.colors = data.data;
-			this.totalPages = data.total_pages;
+			this.loading = true;
+			this.snackbar = false;
+			try {
+				let data = await new ColorService().load(page);
+				this.colors = data.data;
+				this.totalPages = data.total_pages;
+			} catch (error) {
+				this.snackbar = true;
+			} finally {
+				this.loading = false;
+			}
 		},
 		copyClipboard(color) {
 			this.$copyText(color.color).then(() => {
