@@ -44,7 +44,8 @@ export default {
 			page: 1,
 			totalPages: 1,
 			loading: true,
-			snackbar: false
+			snackbar: false,
+			text: 'Ha ocurrido un error'
 		}
 	},
 	mounted() {

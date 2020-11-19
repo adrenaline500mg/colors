@@ -1,11 +1,5 @@
 <template>
-  <v-card
-    class="mx-auto"
-    :color="color.color"
-    max-width="344"
-    outlined
-    @click="$emit('click', color)"
-  >
+  <v-card class="mx-auto" :color="color.color" max-width="344" outlined @click="$emit('click', color)">
     <v-list-item three-line>
       <v-list-item-content>
         <div class="overline mb-4">

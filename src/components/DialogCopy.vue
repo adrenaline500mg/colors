@@ -1,27 +1,22 @@
 <template>
   <div class="text-center">
-    <v-dialog
-      v-model="dialog"
-      width="500"
-    >
+    <v-dialog v-model="dialog" width="500">
       <v-card v-if="color" :color="color.color">
-        <v-card-title>
-          {{ color.name}}
-        </v-card-title>
-
-        <v-card-text>
-          COPIADO
-        </v-card-text>
-
-        <v-divider></v-divider>
+        <v-list-item three-line>
+          <v-list-item-content>
+            <div class="overline mb-4">
+              {{ color.year }}
+            </div>
+            <v-list-item-title class="headline mb-1">
+              COPIADO
+            </v-list-item-title>
+            <v-list-item-subtitle>{{ color.color }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn
-            color="primary"
-            text
-            @click="dialog = false"
-          >
+          <v-btn color="primary" text @click="dialog = false">
             CLOSE
           </v-btn>
         </v-card-actions>
